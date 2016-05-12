@@ -18,10 +18,8 @@
     "web": {
       "commandName": "web",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:5004/calendar/coming/psw",
+      "launchUrl": "http://localhost:5005/calendar/coming/psw",
       "environmentVariables": {
-        "ExchangeUser": "jba",
-        "ExchangeService": "https://mail.codehouse.com/ews/exchange.asmx",
         "Hosting:Environment": "Development"
       }
     }

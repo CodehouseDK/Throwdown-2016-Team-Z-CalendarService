@@ -3,7 +3,7 @@ services:
   web:
     build: .
     ports:
-     - "8080:5004"
+     - "8080:5005"
     depends_on:
      - redis
   redis:

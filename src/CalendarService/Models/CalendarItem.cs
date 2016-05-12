@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using static System.String;
 
 namespace TeamZ.CalendarService.Models
 {
@@ -15,7 +16,25 @@ namespace TeamZ.CalendarService.Models
 
         public override string ToString()
         {
-            return string.Join(" ", Start, Subject, Categories.FirstOrDefault());
+            return Join(" ", Start, Subject, Categories.FirstOrDefault());
+        }
+
+        public string StartText => WriteDate(Start);
+        public string EndText => WriteDate(End);
+
+        private string WriteDate(DateTime date)
+        {
+            if (date == DateTime.MinValue)
+            {
+                return Empty;
+            }
+
+            if (date.Date == date)
+            {
+                return date.ToString("d/M");
+            }
+
+            return date.ToString("d/M HH:mm");
         }
     }
 }

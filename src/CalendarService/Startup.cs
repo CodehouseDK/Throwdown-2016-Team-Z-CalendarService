@@ -17,20 +17,22 @@ namespace TeamZ.CalendarService
 
             services.AddMvc();
             services.AddSingleton<IExchangeService, ExchangeService>();
+            services.AddSingleton<INotificationService, WebSocketsService>();
+            services.AddSingleton<IPersonUpdateService, PersonUpdateService>();
         }
 
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole();
-            
-            app.UseIISPlatformHandler();
-            
-            app.UseDeveloperExceptionPage();
 
-            app.UseMvcWithDefaultRoute();
-            
-            app.UseStaticFiles();
-            
+            app.UseIISPlatformHandler()
+                .UseDeveloperExceptionPage()
+                .UseWebSockets()
+                .UseWebSocketsServer()
+                .UseMvcWithDefaultRoute()
+                .UseStaticFiles()
+                ;
+
         }
     }
 }

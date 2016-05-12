@@ -7,6 +7,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CalendarService", "src\Cale
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BE2ACBC4-719E-472F-AF10-B1232921CE13}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
 		src\CalendarService\global.json = src\CalendarService\global.json
 		readme.md = readme.md
 	EndProjectSection

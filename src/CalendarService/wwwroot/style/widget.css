@@ -1,0 +1,31 @@
+#calendar-widget {
+  background: #2699D0;
+  overflow-x: auto;
+}
+
+#calendar-widget ul, #calendar-widget li {
+    list-style: none;
+    text-align: left;
+}
+
+#calendar-widget .date {
+}
+
+
+
+#calendar-widget .widget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#calendar-widget .widget-headline {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+#calendar-widget .widget-body {
+  background: #2180AC;
+}
+
