@@ -1,4 +1,4 @@
-FROM microsoft/aspnet:1.0.0-rc1-final
+FROM microsoft/aspnet:1.0.0-rc1-final-coreclr
 MAINTAINER jba@codehouse.com
 LABEL Description="Service with calendar widget"
 
