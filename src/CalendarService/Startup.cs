@@ -11,7 +11,7 @@ namespace TeamZ.CalendarService
         public void ConfigureServices(IServiceCollection services)
         {
             var configuration = new ConfigurationBuilder()
-                //.AddJsonFile("appsettings.json")
+                .AddJsonFile("appsettings.json")
                 .AddEnvironmentVariables("Exchange")
                 .AddEnvironmentVariables("Redis")
                 .Build();
@@ -22,6 +22,7 @@ namespace TeamZ.CalendarService
             services.AddSingleton<INotificationService, WebSocketsService>();
             services.AddSingleton<IPersonUpdateService, PersonUpdateService>();
             services.AddSingleton<IScheduedUpdateService, ScheduledUpdateService>();
+            services.AddSingleton<RedisSubscriberService>();
         }
 
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
@@ -36,6 +37,8 @@ namespace TeamZ.CalendarService
                 ;
 
             app.ApplicationServices.GetService<IScheduedUpdateService>().Start();
+            app.ApplicationServices.GetService<RedisSubscriberService>()
+                .Subscribe(msg => app.ApplicationServices.GetService<IPersonUpdateService>().Show(msg));
         }
     }
 }

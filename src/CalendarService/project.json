@@ -19,7 +19,8 @@
     "System.Net.Http": "4.0.0",
     "Newtonsoft.Json": "8.0.3",
     "System.Xml.XmlSerializer": "4.0.10",
-    "Microsoft.AspNet.WebSockets.Server": "1.0.0-rc1-final"
+    "Microsoft.AspNet.WebSockets.Server": "1.0.0-rc1-final",
+    "StackExchange.Redis": "1.1.572-alpha"
   },
   "commands": {
     "web": "Microsoft.AspNet.Server.Kestrel --server.urls http://*:5005"
