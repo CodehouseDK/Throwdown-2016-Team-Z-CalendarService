@@ -6,8 +6,11 @@ namespace TeamZ.CalendarService.Services
 {
     public class RedisSubscriberService
     {
-        private readonly ConnectionMultiplexer _connection;
+        private ConnectionMultiplexer _connection;
         private readonly string _userChannelName;
+        private readonly string _server;
+
+        private bool connected;
 
         public RedisSubscriberService(IConfiguration configuration)
         {
@@ -23,12 +26,23 @@ namespace TeamZ.CalendarService.Services
                 server = server.Substring(prefixToRemove.Length);
             }
 
+            _server = server;
             _userChannelName = configuration["RedisUserChannelName"];
-            _connection = ConnectionMultiplexer.Connect(server);
+        }
+
+        private void Connect()
+        {
+            if (_connection != null)
+            {
+                return;
+            }
+
+            _connection = ConnectionMultiplexer.Connect(_server);
         }
 
         public void Subscribe(Action<string> handler)
         {
+            Connect();
             _connection.GetSubscriber().Subscribe(_userChannelName, (channel, value) => { handler.Invoke(value.ToString()); });
         }
 
