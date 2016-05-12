@@ -4,42 +4,48 @@ var Promise = require("promise");
 
 module.exports = (url) => {
 
+    var websocket;
+
+    function init() {
+        websocket = new WebSocket('ws://' + url);
+        websocket.onopen = function (evt) { onOpen(evt) };
+        websocket.onclose = function (evt) { onClose(evt) };
+        websocket.onmessage = function (evt) { onMessage(evt) };
+        websocket.onerror = function (evt) { onError(evt) };
+    }
+
+    function onOpen() {
+        console.log('Connected to ' + url);
+        eventEmitter.emit('connection-open', "Connection to " + url);
+    }
+
+    function onClose(event) {
+        console.log('Disconnected...');
+        console.log(event);
+
+        init();
+    }
+
+    function onMessage(event) {
+        console.log('Received:', event);
+        eventEmitter.emit('message', event.data);
+    }
+
+    function onError(event) {
+        console.log('error:', event);
+    }
+
     return new Promise((resolve, reject) => {
-        var socket;
 
         try {
-            socket = new WebSocket("ws://" + url);
+            init();
         } catch (error) {
             reject(error);
             return;
         }
 
-        socket.onmessage = (event) => {
-            console.log('Received:');
-            console.log(event);
-            eventEmitter.emit('message', event.data);
-        }
-        eventEmitter.on("send", data => {
-            socket.send(data);
-        });
+        resolve(eventEmitter);
 
-        socket.onerror = (event) => {
-            console.log('error:');
-            console.log(event);
-            eventEmitter.emit('error', event.data);
-        }
-
-        socket.onclose = (event) => {
-            console.log('error:');
-            console.log(event);
-            eventEmitter.emit('error', event.data);
-        }
-
-        socket.onopen = () => {
-            console.log('connected');
-            eventEmitter.emit('connection-open', "Connection to " + url);
-            return resolve(eventEmitter);
-        };
     });
 
 };
