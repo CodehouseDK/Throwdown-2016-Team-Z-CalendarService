@@ -7,11 +7,22 @@ namespace TeamZ.CalendarService.Services
     public class RedisSubscriberService
     {
         private readonly ConnectionMultiplexer _connection;
-        private string _userChannelName;
+        private readonly string _userChannelName;
 
         public RedisSubscriberService(IConfiguration configuration)
         {
-            var server = configuration["RedisServer"];
+            var server = configuration["REDIS_PORT"];
+            if (string.IsNullOrEmpty(server))
+            {
+                server = configuration["RedisServer"];
+            }
+
+            const string prefixToRemove = "tcp://";
+            if (server.StartsWith(prefixToRemove))
+            {
+                server = server.Substring(prefixToRemove.Length);
+            }
+
             _userChannelName = configuration["RedisUserChannelName"];
             _connection = ConnectionMultiplexer.Connect(server);
         }
