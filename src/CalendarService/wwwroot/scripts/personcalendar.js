@@ -1,12 +1,11 @@
 require("../style/widget.css");
 module.exports = function () {
+    var id = 'calendar-widget';
     var instance = {};
     var timeout;
 
-    document.write('<section id="calendar-widget" class="widget calendar-widget"></section>');
-
     instance.getElement = function () {
-        var elm = document.getElementById('calendar-widget');
+        var elm = document.getElementById(id);
         return elm;
     }
 
@@ -40,9 +39,13 @@ module.exports = function () {
         var elm = instance.getElement();
         elm.innerHTML = html;
 
-        timeout = setTimeout(function() {
+        timeout = setTimeout(function () {
             instance.render({});
         }, 60 * 1000);
+    };
+
+    instance.init = function (elementId) {
+        id = elementId || id;
     };
 
     return instance;

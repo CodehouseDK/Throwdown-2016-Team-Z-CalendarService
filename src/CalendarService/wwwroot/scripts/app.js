@@ -20,4 +20,8 @@ var socketEvents = socket('localhost:5005').then(events => {
     });
 });
 
-vacationcalendar.update();
+document.write('<section id="calendar-widget" class="widget calendar-widget"></section>');
+document.write('<section id="vacation-widget" class="widget calendar-widget"></section>');
+
+personcalendar.init();
+vacationcalendar.init();

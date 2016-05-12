@@ -1,11 +1,10 @@
 require("../style/widget.css");
 module.exports = function () {
+    var id = 'vacation-widget';
     var instance = {};
 
-    document.write('<section id="vacation-widget" class="widget calendar-widget"></section>');
-
     instance.getElement = function () {
-        var elm = document.getElementById('vacation-widget');
+        var elm = document.getElementById(id);
         return elm;
     }
 
@@ -59,6 +58,11 @@ module.exports = function () {
         var elm = instance.getElement();
         elm.innerHTML = html;
     };
+
+    instance.init = function (elementId) {
+        id = elementId || id;
+        instance.update();
+    }
 
     return instance;
 
