@@ -36,8 +36,8 @@ COPY . /app/
 WORKDIR /app
 
 
-RUN ["dnvm", "install", "1.0.0-rc1-final", "-r", "coreclr"]
-RUN ["dnvm", "use", "1.0.0-rc1-final", "-r", "coreclr"]
+# RUN ["dnvm", "install", "1.0.0-rc1-final", "-r", "coreclr"]
+# RUN ["dnvm", "use", "1.0.0-rc1-final", "-r", "coreclr"]
 
 RUN ["dnu", "restore"]
 
