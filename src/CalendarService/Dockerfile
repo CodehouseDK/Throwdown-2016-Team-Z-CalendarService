@@ -1,4 +1,7 @@
-FROM microsoft/aspnet:1.0.0-rc1-update1
+FROM microsoft/aspnet:1.0.0-rc1-final
+MAINTAINER jba@codehouse.com
+LABEL Description="Service with calendar widget"
+
 #INSTALL NODE BEGIN
 RUN set -ex \
   && for key in \
@@ -17,6 +20,10 @@ RUN set -ex \
 ENV NPM_CONFIG_LOGLEVEL info
 ENV NODE_VERSION 6.1.0
 
+ENV ExchangeServer https://mail.codehouse.com/ews/exchange.asmx
+ENV ExchangeUser jba
+ENV ExchangePassword secretpassword
+
 RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
   && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
   && gpg --batch --decrypt --output SHASUMS256.txt SHASUMS256.txt.asc \
@@ -27,6 +34,8 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 
 COPY . /app/
 WORKDIR /app
+
+
 RUN ["dnu", "restore"]
 
 RUN ["npm", "install"]
