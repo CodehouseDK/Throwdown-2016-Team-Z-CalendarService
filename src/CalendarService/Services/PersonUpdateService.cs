@@ -20,8 +20,6 @@ namespace TeamZ.CalendarService.Services
         {
             _exchangeService = exchangeService;
             _notificationService = notificationService;
-
-            
         }
 
         public async Task Show(string username)
@@ -33,7 +31,7 @@ namespace TeamZ.CalendarService.Services
             }
 
             var data = await _exchangeService.GetAppointments(username);
-            var model = new StateModel
+            var model = new PersonStateModel
             {
                 CurrentUsername = username,
                 Entries = data.ToArray()

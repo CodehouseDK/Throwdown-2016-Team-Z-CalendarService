@@ -11,7 +11,7 @@ module.exports = function () {
 
     instance.render = function (data) {
         var html = '';
-        if (data) {
+        if (data.CurrentUsername) {
             html += '<header class="widget-header"><h2>Hi ' + data.CurrentUsername + '</h2></header>';
             html += '<div class="widget-body">';
 
@@ -28,26 +28,6 @@ module.exports = function () {
 
         var elm = instance.getElement();
         elm.innerHTML = html;
-    };
-
-    instance.update = function(username) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/calendar/coming/' + username);
-        xhr.onreadystatechange = function() {
-            var DONE = 4;
-            var OK = 200;
-            if (xhr.readyState !== DONE) {
-                return;
-            }
-
-            if (xhr.status !== OK) {
-                return;
-            }
-
-            var data = JSON.parse(xhr.responseText);
-            instance.render(data);
-        }
-        xhr.send(null);
     };
 
     return instance;

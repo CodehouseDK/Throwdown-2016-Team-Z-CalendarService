@@ -1,5 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
+using TeamZ.CalendarService.Models;
 using TeamZ.CalendarService.Services;
 
 namespace TeamZ.CalendarService.Controllers
@@ -17,6 +20,16 @@ namespace TeamZ.CalendarService.Controllers
         {
             var result = await _exchangeService.GetAppointments(id);
             return Json(result);
+        }
+
+        public async Task<IActionResult> Vacation()
+        {
+            var result = await _exchangeService.OnVacation(DateTime.Now);
+            var model = new VacationStateModel
+            {
+                Entries = result.ToArray()
+            };
+            return Json(model);
         }
     }
 }

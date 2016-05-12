@@ -29,3 +29,16 @@
   background: #2180AC;
 }
 
+#vacation-widget {
+  background: #5CC8E5;
+}
+#vacation-widget ul, #vacation-widget li {
+    list-style: none;
+    text-align: left;
+}
+
+
+#vacation-widget .widget-body{
+  background: darken(#5CC8E5, 8%);
+}
+

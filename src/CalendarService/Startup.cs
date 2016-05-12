@@ -11,7 +11,9 @@ namespace TeamZ.CalendarService
         public void ConfigureServices(IServiceCollection services)
         {
             var configuration = new ConfigurationBuilder()
+                //.AddJsonFile("appsettings.json")
                 .AddEnvironmentVariables("Exchange")
+                .AddEnvironmentVariables("Redis")
                 .Build();
             services.AddInstance<IConfiguration>(configuration);
 
@@ -19,12 +21,12 @@ namespace TeamZ.CalendarService
             services.AddSingleton<IExchangeService, ExchangeService>();
             services.AddSingleton<INotificationService, WebSocketsService>();
             services.AddSingleton<IPersonUpdateService, PersonUpdateService>();
+            services.AddSingleton<IScheduedUpdateService, ScheduledUpdateService>();
         }
 
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole();
-
             app.UseIISPlatformHandler()
                 .UseDeveloperExceptionPage()
                 .UseWebSockets()
@@ -33,6 +35,7 @@ namespace TeamZ.CalendarService
                 .UseStaticFiles()
                 ;
 
+            app.ApplicationServices.GetService<IScheduedUpdateService>().Start();
         }
     }
 }

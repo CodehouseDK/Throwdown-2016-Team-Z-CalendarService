@@ -6,6 +6,7 @@ namespace TeamZ.CalendarService.Models
 {
     public class CalendarItem
     {
+        public string Username { get; set; }
         public string Subject { get; set; }
         public string[] Categories { get; set; }
         public DateTime Start { get; set; }
@@ -22,7 +23,11 @@ namespace TeamZ.CalendarService.Models
         public string StartText => WriteDate(Start);
         public string EndText => WriteDate(End);
 
-        private string WriteDate(DateTime date)
+        public string Status { get; set; }
+
+        public bool OutOfOffice => Status == "OOF";
+
+        private static string WriteDate(DateTime date)
         {
             if (date == DateTime.MinValue)
             {
