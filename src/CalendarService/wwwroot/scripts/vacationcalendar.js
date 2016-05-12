@@ -2,7 +2,7 @@ require("../style/widget.css");
 module.exports = function () {
     var instance = {};
 
-    document.write('<section id="vacation-widget" class="widget"></section>');
+    document.write('<section id="vacation-widget" class="widget calendar-widget"></section>');
 
     instance.getElement = function() {
         var elm = document.getElementById('vacation-widget');
