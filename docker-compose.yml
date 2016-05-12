@@ -1,0 +1,10 @@
+version: '2'
+services:
+  web:
+    build: .
+    ports:
+     - "8080:5004"
+    depends_on:
+     - redis
+  redis:
+    image: redis
