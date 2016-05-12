@@ -7,8 +7,9 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Xml;
 using Microsoft.Extensions.Configuration;
+using TeamZ.CalendarService.Models;
 
-namespace CalendarService.Services
+namespace TeamZ.CalendarService.Services
 {
     public interface IExchangeService
     {
@@ -94,22 +95,6 @@ namespace CalendarService.Services
                 };
                 yield return resultItem;
             }
-        }
-    }
-
-    public class CalendarItem
-    {
-        public string Subject { get; set; }
-        public string[] Categories { get; set; }
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
-        public string Location { get; set; }
-        public bool IsRecurring { get; set; }
-        public bool IsAllDay { get; set; }
-
-        public override string ToString()
-        {
-            return string.Join(" ", Start, Subject, Categories.FirstOrDefault());
         }
     }
 }

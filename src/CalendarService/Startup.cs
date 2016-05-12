@@ -1,11 +1,10 @@
-using CalendarService.Services;
 using Microsoft.AspNet.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using TeamZ.Services;
+using TeamZ.CalendarService.Services;
 
-namespace TeamX
+namespace TeamZ.CalendarService
 {
     public class Startup
     {
@@ -17,7 +16,6 @@ namespace TeamX
             services.AddInstance<IConfiguration>(configuration);
 
             services.AddMvc();
-            services.AddSingleton<INameService, NameService>();
             services.AddSingleton<IExchangeService, ExchangeService>();
         }
 

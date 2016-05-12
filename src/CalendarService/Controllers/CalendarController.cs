@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using CalendarService.Services;
 using Microsoft.AspNet.Mvc;
+using TeamZ.CalendarService.Services;
 
-namespace CalendarService.Controllers
+namespace TeamZ.CalendarService.Controllers
 {
     public class CalendarController : Controller
     {

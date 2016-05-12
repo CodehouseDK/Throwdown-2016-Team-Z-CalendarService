@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CalendarService.Services
+namespace TeamZ.CalendarService.Services
 {
     public static class CalendarFolderMap
     {
