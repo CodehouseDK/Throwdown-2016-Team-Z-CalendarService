@@ -1,6 +1,7 @@
 require("../style/widget.css");
 module.exports = function () {
     var instance = {};
+    var timeout;
 
     document.write('<section id="calendar-widget" class="widget calendar-widget"></section>');
 
@@ -10,6 +11,11 @@ module.exports = function () {
     }
 
     instance.render = function (data) {
+        if (timeout) {
+            clearTimeout(timeout);
+            timeout = null;
+        }
+
         var html = '';
         if (data.CurrentUsername) {
             html += '<header class="widget-header"><h2>Hi ' + data.CurrentUsername + '</h2></header>';
@@ -18,7 +24,10 @@ module.exports = function () {
             if (data.Entries && data.Entries.length > 0) {
                 html += '<ul>';
                 data.Entries.forEach(itm => {
-                    html += '<li><span class="start date">' + itm.StartText + '</span> <strong class="subject">' + itm.Subject + '</strong></li>';
+                    html += '<li>';
+                    html += '<span class="start date">' + itm.StartText + '</span> ';
+                    html += '<strong class="subject">' + itm.Subject + '</strong>';
+                    html += '</li>';
                 });
                 html += '</ul>';
             } else {
@@ -30,6 +39,10 @@ module.exports = function () {
 
         var elm = instance.getElement();
         elm.innerHTML = html;
+
+        timeout = setTimeout(function() {
+            instance.render({});
+        }, 60 * 1000);
     };
 
     return instance;

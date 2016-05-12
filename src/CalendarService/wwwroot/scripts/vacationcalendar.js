@@ -4,20 +4,21 @@ module.exports = function () {
 
     document.write('<section id="vacation-widget" class="widget calendar-widget"></section>');
 
-    instance.getElement = function() {
+    instance.getElement = function () {
         var elm = document.getElementById('vacation-widget');
         return elm;
     }
 
-    instance.update = function() {
+    instance.update = function () {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', '/calendar/vacation');
-        xhr.onreadystatechange = function() {
+        xhr.onreadystatechange = function () {
             if (xhr.readyState !== 4) {
                 return;
             }
 
             if (xhr.status !== 200) {
+                setTimeout(instance.update, 500);
                 return;
             }
 
@@ -28,7 +29,7 @@ module.exports = function () {
         xhr.send(null);
     };
 
-    instance.render = function(data) {
+    instance.render = function (data) {
         var html = '';
         html += '<header class="widget-header"><h2>Who is rebooting</h2></header>';
         html += '<div class="widget-body">';
@@ -36,7 +37,17 @@ module.exports = function () {
         if (data.Entries) {
             html += '<ul>';
             data.Entries.forEach(itm => {
-                html += '<li><strong class="person">' + itm.Username + '</strong> <span class="from">' + itm.StartText + '</span> - <span class="to">' + itm.EndText + '</span> <span class="subject">' + itm.Subject + '</span>,<span class="location">' + itm.Location + '</span></li>';
+                html += '<li>';
+                html += '<strong class="person">' + itm.Username + '</strong> ';
+                html += '<span class="from">' + itm.StartText + '</span>';
+                html += ' - ';
+                html += '<span class="to">' + itm.EndText + '</span> ';
+                html += '<span class="subject">' + itm.Subject + '</span>';
+                if (itm.Location) {
+                    html += ', <span class="location">' + itm.Location + '</span>';
+                }
+
+                html += '</li>';
             });
             html += '</ul>';
         } else {

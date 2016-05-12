@@ -23,7 +23,7 @@ module.exports = (url) => {
         console.log('Disconnected...');
         console.log(event);
 
-        init();
+        setTimeout(init, 250);
     }
 
     function onMessage(event) {
