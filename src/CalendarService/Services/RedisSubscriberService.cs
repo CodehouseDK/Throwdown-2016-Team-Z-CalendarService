@@ -10,8 +10,6 @@ namespace TeamZ.CalendarService.Services
         private readonly string _userChannelName;
         private readonly string _server;
 
-        private bool connected;
-
         public RedisSubscriberService(IConfiguration configuration)
         {
             var server = configuration["REDIS_PORT"];
