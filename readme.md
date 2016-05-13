@@ -1,2 +1,2 @@
 # ExchangeService
-Add environment variable "ExchangePassword" and "ExchageUser" with credentials
+Add "ExchangePassword" and "ExchageUser" to appsettings.json
