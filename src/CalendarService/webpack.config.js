@@ -22,18 +22,9 @@ module.exports = {
                 }
             },
             {
-                test: /\.(scss|sass|css)$/,
-                loader: "style!css!sass"
+                test: /\.(css)$/,
+                loader: "style!css"
             },
-            {
-                test: /\.hbs$/,
-                loader: "handlebars-loader"
-            },
-            {
-                test: /\.html/,
-                loader: "html"
-            },
-
             {
                 test: /\.(woff|woff2|eot|ttf|jpe?g|png|gif|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 loader: 'file-loader?name=../../wwwroot/images/[hash].[ext]'
