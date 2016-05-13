@@ -19,7 +19,16 @@ namespace TeamZ.CalendarService
 
             services.AddLogging();
             services.AddMvc();
-            services.AddSingleton<IExchangeService, ExchangeService>();
+
+            if (string.IsNullOrEmpty(configuration["ExchangeProxy"]))
+            {
+                services.AddSingleton<IExchangeService, ExchangeService>();
+            }
+            else
+            {
+                services.AddSingleton<IExchangeService, ExchangeProxyService>();
+            }
+
             services.AddSingleton<INotificationService, WebSocketsService>();
             services.AddSingleton<IPersonUpdateService, PersonUpdateService>();
             services.AddSingleton<IScheduedUpdateService, ScheduledUpdateService>();
