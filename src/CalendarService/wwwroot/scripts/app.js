@@ -2,26 +2,30 @@ var socket = require('./sockets.js');
 var personcalendar = require('./personcalendar.js');
 var vacationcalendar = require('./vacationcalendar.js');
 
-var socketEvents = socket('localhost:5005').then(events => {
-    events.on('message', data => {
-        if (!data) {
-            return;
-        }
-        var obj = JSON.parse(data);
-        switch(obj.Type) {
-            case 'PersonStateModel':
-                personcalendar.render(obj);
-                break;
+var socketEvents;
 
-            case 'VacationStateModel':
-                vacationcalendar.render(obj);
-                break;
-        }
-    });
-});
+window.calendarservice = {
+    init: function(socketurl, vacationid, personcalendarid) {
+        vacationcalendar.init(vacationid);
+        personcalendar.init(personcalendarid);
 
-document.write('<section id="calendar-widget" class="widget calendar-widget"></section>');
-document.write('<section id="vacation-widget" class="widget calendar-widget"></section>');
+        socketEvents = socket(socketurl).then(events => {
+            events.on('message', data => {
+                if (!data) {
+                    return;
+                }
+                var obj = JSON.parse(data);
+                switch (obj.Type) {
+                case 'PersonStateModel':
+                    personcalendar.render(obj);
+                    break;
 
-personcalendar.init();
-vacationcalendar.init();
+                case 'VacationStateModel':
+                    vacationcalendar.render(obj);
+                    break;
+                }
+            });
+        });
+
+    }
+};

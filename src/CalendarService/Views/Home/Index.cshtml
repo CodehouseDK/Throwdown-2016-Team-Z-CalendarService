@@ -4,7 +4,11 @@
 }
 
 <div class="dashboard">
-    
-    <script src="/scripts/bundle.js"></script>
-
+    <section id="calendar-widget" class="widget calendar-widget"></section>
+    <section id="vacation-widget" class="widget calendar-widget"></section>
 </div>
+
+<script src="/scripts/bundle.js"></script>
+<script>
+    window.calendarservice.init('localhost:5005', 'vacation-widget', 'calendar-widget');
+</script>
