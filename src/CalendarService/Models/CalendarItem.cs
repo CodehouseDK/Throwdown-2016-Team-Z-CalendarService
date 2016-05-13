@@ -36,10 +36,10 @@ namespace TeamZ.CalendarService.Models
 
             if (date.Date == date)
             {
-                return date.ToString("d/M");
+                return date.ToString("d\\/M");
             }
 
-            return date.ToString("d/M HH:mm");
+            return date.ToString("d\\/M HH:mm");
         }
     }
 }

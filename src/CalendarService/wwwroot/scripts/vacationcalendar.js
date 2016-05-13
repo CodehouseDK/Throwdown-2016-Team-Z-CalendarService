@@ -37,16 +37,15 @@ module.exports = function () {
             html += '<ul>';
             data.Entries.forEach(itm => {
                 html += '<li>';
-                html += '<strong class="person">' + itm.Username + '</strong> ';
-                html += '<span class="from">' + itm.StartText + '</span>';
-                html += ' - ';
-                html += '<span class="to">' + itm.EndText + '</span> ';
+                html += '<img src="https://throwdown2016.blob.core.windows.net/codehousethrowdown/' + itm.Username + '.png" />';
+                html += '<span class="description">';
+                html += '<span class="periode">' + itm.StartText + ' - ' + itm.EndText + '</span>';
                 html += '<span class="subject">' + itm.Subject + '</span>';
                 if (itm.Location) {
-                    html += ', <span class="location">' + itm.Location + '</span>';
+                    html += '<span class="location">' + itm.Location + '</span>';
                 }
 
-                html += '</li>';
+                html += '</span></li>';
             });
             html += '</ul>';
         } else {

@@ -32,3 +32,34 @@
     #vacation-widget .widget-header {
         background: darken(#5CC8E5, 8%);
     }
+
+    #vacation-widget li {
+        position: relative;
+        float: left;
+        width: 150px;
+        margin: 0 8px;
+    }
+
+    #vacation-widget .description {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(10, 10, 10, 0.5);
+    }
+    #vacation-widget .periode, 
+    #vacation-widget .subject, 
+    #vacation-widget .location {
+        text-overflow: ellipsis;
+        width: 100%;
+        display: block;
+    }
+
+    #vacation-widget .subject,
+    #vacation-widget .location {
+        font-size: 70%;
+    }
+
+    #vacation-widget img {
+        max-width: 100%;
+    }

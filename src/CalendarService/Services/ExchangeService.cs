@@ -48,6 +48,7 @@ namespace TeamZ.CalendarService.Services
             await Task.WhenAll(appointmentTasks);
             var outOfOfficeItems = appointmentTasks
                 .SelectMany(task => task.Result.Where(item => item.OutOfOffice && item.IsAllDay))
+                .OrderBy(x => x.Start)
                 .ToList();
 
             return outOfOfficeItems;
