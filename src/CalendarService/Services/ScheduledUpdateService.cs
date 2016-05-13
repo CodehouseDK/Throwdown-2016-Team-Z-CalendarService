@@ -26,7 +26,7 @@ namespace TeamZ.CalendarService.Services
 
         public void Start()
         {
-            _timer = new Timer(TimerExpired, null, new TimeSpan(1, 0, 5), TimeSpan.Zero);
+            _timer = new Timer(TimerExpired, null, new TimeSpan(0, 10, 0), TimeSpan.Zero);
         }
 
         private void TimerExpired(object state)
