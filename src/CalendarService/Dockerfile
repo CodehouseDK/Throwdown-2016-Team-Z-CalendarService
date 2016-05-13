@@ -39,7 +39,7 @@ WORKDIR /app
 # RUN ["dnvm", "install", "1.0.0-rc1-final", "-r", "coreclr"]
 # RUN ["dnvm", "use", "1.0.0-rc1-final", "-r", "coreclr"]
 
-RUN ["dnu", "restore"]
+RUN ["dnu", "restore", "--runtime=ubuntu.14.04-x64"]
 
 RUN ["npm", "install"]
 RUN ["npm", "run", "build"]
