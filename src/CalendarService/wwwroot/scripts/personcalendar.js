@@ -17,7 +17,7 @@ module.exports = function () {
 
         var html = '';
         if (data.CurrentUsername) {
-            html += '<header class="widget-header"><h2>Hi ' + data.CurrentUsername + '</h2></header>';
+            html += '<header class="widget-header"><h2>Your day, ' + data.CurrentUsername + '</h2></header>';
             html += '<div class="widget-body">';
 
             if (data.Entries && data.Entries.length > 0) {
