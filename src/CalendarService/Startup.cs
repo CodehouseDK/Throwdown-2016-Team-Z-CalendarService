@@ -13,10 +13,11 @@ namespace TeamZ.CalendarService
             var configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .AddEnvironmentVariables("Exchange")
-                .AddEnvironmentVariables("Redis")
+                .AddEnvironmentVariables("REDIS_")
                 .Build();
             services.AddInstance<IConfiguration>(configuration);
 
+            services.AddLogging();
             services.AddMvc();
             services.AddSingleton<IExchangeService, ExchangeService>();
             services.AddSingleton<INotificationService, WebSocketsService>();

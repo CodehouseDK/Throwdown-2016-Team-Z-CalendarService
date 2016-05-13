@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Xml;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using TeamZ.CalendarService.Models;
 
 namespace TeamZ.CalendarService.Services
@@ -25,12 +26,15 @@ namespace TeamZ.CalendarService.Services
 
 
         private readonly HttpClient _client;
+        private readonly ILogger _logger;
 
-        public ExchangeService(IConfiguration configuration)
+        public ExchangeService(IConfiguration configuration, ILoggerFactory loggerFactory)
         {
+            _logger = loggerFactory.CreateLogger("ExchangeService");
             Username = configuration["ExchangeUser"];
             Password = configuration["ExchangePassword"];
             ServiceAddress = configuration["ExchangeService"] ?? "https://mail.codehouse.com/ews/exchange.asmx";
+            //_logger.Log(LogLevel.Information, 0, this, null, (me, exc) => string.Format("Conneting to {0} using {1} and {2}", ((ExchangeService)me).ServiceAddress, ((ExchangeService)me).Username, ((ExchangeService)me).Password));
 
             var handler = new HttpClientHandler
             {
@@ -74,11 +78,17 @@ namespace TeamZ.CalendarService.Services
 
             var response = await _client.PostAsync(ServiceAddress, request);
             var xmlResult = await response.Content.ReadAsStringAsync();
+            _logger.Log(LogLevel.Debug, 0, xmlResult, null, (state, exc) => "Received for " + username + ": " + state.ToString());
             return GetCalendarItemsFromXml(xmlResult, username);
         }
 
         public IEnumerable<CalendarItem> GetCalendarItemsFromXml(string xml, string username)
         {
+            if (string.IsNullOrEmpty(xml))
+            {
+                yield break;
+            }
+
             var doc = new XmlDocument();
             doc.LoadXml(xml);
             
