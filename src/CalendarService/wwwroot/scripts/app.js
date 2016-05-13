@@ -5,11 +5,11 @@ var vacationcalendar = require('./vacationcalendar.js');
 var socketEvents;
 
 window.calendarservice = {
-    init: function (socketurl, vacationid, personcalendarid) {
-        vacationcalendar.init(vacationid);
+    init: function (rooturl, vacationid, personcalendarid) {
+        vacationcalendar.init(vacationid, rooturl);
         personcalendar.init(personcalendarid);
 
-        socketEvents = socket(socketurl).then(events => {
+        socketEvents = socket(rooturl).then(events => {
             events
                 .on('message', data => {
                     if (!data) {
@@ -26,7 +26,7 @@ window.calendarservice = {
                             break;
                     }
                 })
-                .on('connection-open', data => {
+                .on('connection-open', () => {
                     vacationcalendar.update();
                 });
         });

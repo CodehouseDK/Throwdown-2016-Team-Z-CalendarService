@@ -10,5 +10,5 @@
 
 <script src="/scripts/bundle.js"></script>
 <script>
-    window.calendarservice.init('localhost:5005', 'vacation-widget', 'calendar-widget');
+    window.calendarservice.init( window.location.href.replace('http://', ''), 'vacation-widget', 'calendar-widget');
 </script>

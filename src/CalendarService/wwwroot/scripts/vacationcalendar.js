@@ -3,6 +3,8 @@ module.exports = function () {
     var id = 'vacation-widget';
     var instance = {};
 
+    var rooturl = '/';
+
     instance.getElement = function () {
         var elm = document.getElementById(id);
         return elm;
@@ -10,7 +12,7 @@ module.exports = function () {
 
     instance.update = function () {
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/calendar/vacation');
+        xhr.open('GET', rooturl + 'calendar/vacation');
         xhr.onreadystatechange = function () {
             if (xhr.readyState !== 4) {
                 return;
@@ -58,9 +60,16 @@ module.exports = function () {
         elm.innerHTML = html;
     };
 
-    instance.init = function (elementId) {
+    instance.init = function (elementId, url) {
         id = elementId || id;
-        instance.update();
+        if (url && url.indexOf('http') < 0) {
+            url = 'http://' + url;
+        }
+        if (url && url.substring(url.length - 1) !== '/') {
+            url += '/';
+        }
+
+        rooturl = url;
     }
 
     return instance;
