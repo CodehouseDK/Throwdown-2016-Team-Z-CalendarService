@@ -14,6 +14,7 @@
 #calendar-widget {
     background: #2699D0;
     overflow-x: auto;
+    color: white;
 }
 
     #calendar-widget .widget-header {
@@ -28,6 +29,7 @@
 
 #vacation-widget {
     background: #5CC8E5;
+    color: white;
 }
 
     #vacation-widget .widget-header {
@@ -48,6 +50,12 @@
         right: 0;
         background-color: rgba(10, 10, 10, 0.5);
     }
+
+    #vacation-widget .date {
+        white-space: nowrap;
+    }
+
+
     #vacation-widget .periode, 
     #vacation-widget .subject, 
     #vacation-widget .location {

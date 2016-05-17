@@ -27,7 +27,7 @@ window.calendarservice = {
                     }
                 })
                 .on('connection-open', () => {
-                    vacationcalendar.update();
+                    //vacationcalendar.update();
                 });
         });
 

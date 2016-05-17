@@ -41,7 +41,7 @@ module.exports = function () {
                 html += '<li>';
                 html += '<img src="https://throwdown2016.blob.core.windows.net/codehousethrowdown/' + itm.Username + '.png" />';
                 html += '<span class="description">';
-                html += '<span class="periode">' + itm.StartText + ' - ' + itm.EndText + '</span>';
+                html += '<span class="periode"><span class="date">' + itm.StartText + '</span> - <span class="date">' + itm.EndText + '</span></span>';
                 html += '<span class="subject">' + itm.Subject + '</span>';
                 if (itm.Location) {
                     html += '<span class="location">' + itm.Location + '</span>';
