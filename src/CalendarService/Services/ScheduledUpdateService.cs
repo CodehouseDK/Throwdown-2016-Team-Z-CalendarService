@@ -9,6 +9,7 @@ namespace TeamZ.CalendarService.Services
     public interface IScheduedUpdateService
     {
         void Start();
+        void Trigger();
     }
 
     public class ScheduledUpdateService : IScheduedUpdateService
@@ -26,15 +27,20 @@ namespace TeamZ.CalendarService.Services
 
         public void Start()
         {
-            _timer = new Timer(TimerExpired, null, new TimeSpan(0, 10, 0), TimeSpan.Zero);
+            _timer = new Timer(TimerExpired, null, new TimeSpan(0, 2, 0), TimeSpan.Zero);
         }
 
-        private void TimerExpired(object state)
+        public void Trigger()
         {
             var task = CreateModel();
             Task.WaitAll(task);
             var model = task.Result;
             _notificationService.Send(model);
+        }
+
+        private void TimerExpired(object state)
+        {
+            Trigger();
         }
 
         private async Task<VacationStateModel> CreateModel()

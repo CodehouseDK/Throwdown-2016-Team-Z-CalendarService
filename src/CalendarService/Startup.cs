@@ -44,9 +44,16 @@ namespace TeamZ.CalendarService
                 .UseWebSocketsServer()
                 .UseMvcWithDefaultRoute()
                 .UseStaticFiles()
-                ;
+                .UseCors(options =>
+                {
+                    options.AllowAnyOrigin();
+                });
 
-            app.ApplicationServices.GetService<IScheduedUpdateService>().Start();
+            if (string.IsNullOrEmpty(app.ApplicationServices.GetService<IConfiguration>()["ExchangeProxy"]))
+            {
+                app.ApplicationServices.GetService<IScheduedUpdateService>().Start();
+            }
+
             app.ApplicationServices.GetService<RedisSubscriberService>()
                 .Subscribe(msg => app.ApplicationServices.GetService<IPersonUpdateService>().Show(msg));
         }

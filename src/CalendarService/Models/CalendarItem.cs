@@ -27,14 +27,14 @@ namespace TeamZ.CalendarService.Models
 
         public bool OutOfOffice => Status == "OOF";
 
-        private static string WriteDate(DateTime date)
+        private string WriteDate(DateTime date)
         {
             if (date == DateTime.MinValue)
             {
                 return Empty;
             }
 
-            if (date.Date == date)
+            if (date.Date == date || IsAllDay)
             {
                 return date.ToString("d\\/M");
             }
